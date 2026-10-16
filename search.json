@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "City bike data Project",
+    "section": "",
+    "text": "Figure 1. Example figure for HTML format test!\n    \n  \n  \n    Figure 1. is on the left. Here is space for in-depth analysis. we can use HTML within Markdown to the format more appealing\n  \n\nWe can also continue in plain markdown after the HTML Block.\n Plain markdown also works and is a lot simpler to use\n\n\nCode\nprint('Here is a test code block. Code output works, active code does not')\n\n\nhere is a test code block"
+  }
+]
