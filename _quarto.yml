@@ -1,0 +1,9 @@
+project:
+  type: website
+
+format:
+  html:
+    toc: true
+    smooth-scroll: true
+    code-fold: true
+    lightbox: true
