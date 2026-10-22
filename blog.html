@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>City bike data Project</title>
+<title>Analysis of Helsinki city bike traffic data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,41 +25,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -122,15 +87,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#trip-data" id="toc-trip-data" class="nav-link" data-scroll-target="#trip-data">Trip data</a>
+  <ul class="collapse">
+  <li><a href="#multi-year-evolution-20172025" id="toc-multi-year-evolution-20172025" class="nav-link" data-scroll-target="#multi-year-evolution-20172025">Multi-Year Evolution (2017–2025)</a></li>
+  </ul></li>
+  <li><a href="#stations" id="toc-stations" class="nav-link" data-scroll-target="#stations">Stations</a></li>
+  <li><a href="#insights-from-data" id="toc-insights-from-data" class="nav-link" data-scroll-target="#insights-from-data">Insights from data</a>
+  <ul class="collapse">
+  <li><a href="#ride-capacity-calculator" id="toc-ride-capacity-calculator" class="nav-link" data-scroll-target="#ride-capacity-calculator">Ride capacity calculator</a></li>
+  </ul></li>
+  <li><a href="#what-our-findings-tell-to-hsl-and-users" id="toc-what-our-findings-tell-to-hsl-and-users" class="nav-link" data-scroll-target="#what-our-findings-tell-to-hsl-and-users">What our findings tell to HSL and users</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#project-limitations" id="toc-project-limitations" class="nav-link" data-scroll-target="#project-limitations">Project Limitations</a></li>
+  <li><a href="#possible-future-analysis" id="toc-possible-future-analysis" class="nav-link" data-scroll-target="#possible-future-analysis">Possible Future Analysis</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">City bike data Project</h1>
+<h1 class="title">Analysis of Helsinki city bike traffic data</h1>
 </div>
 
 
@@ -147,114 +131,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div style="display: flex; gap: 20px;">
-  <div style="flex: 0 0 40%;">
-    <img src="Distances.png" style="width: 100%; border-radius: 4px;">
-    <div style="text-align: center;">
-      Figure 1. Example figure for HTML format test!
-    </div>
-  </div>
-  <div style="flex: 1;">
-    Figure 1. is on the left. Here is space for in-depth analysis. we can use HTML within Markdown to the format more appealing
-  </div>
-</div>
-<p>We can also continue in plain markdown after the HTML Block.</p>
-<p><img src="Distances.png" class="img-fluid" alt="Example image"> Plain markdown also works and is a lot simpler to use</p>
-<div id="e0db67ce" class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Here is a test code block. Code output works, active code does not'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>here is a test code block</code></pre>
-</div>
-</div>
-<p>Here Is a coefficient calculator</p>
-<div id="e0e6c2e4" class="cell" data-execution_count="31">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'coefs.json'</span>, <span class="st">'r'</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>) <span class="im">as</span> f:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> json.load(f)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>data_json <span class="op">=</span> json.dumps(data)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>htmlCode <span class="op">=</span> <span class="ss">f"""</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ss">&lt;head&gt;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;style&gt;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">        .grid </span><span class="ch">{{</span><span class="ss"> display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 600px; margin: auto; </span><span class="ch">}}</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ss">        input </span><span class="ch">{{</span><span class="ss"> width: 100%; padding: 6px; box-sizing: border-box; </span><span class="ch">}}</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">        .button </span><span class="ch">{{</span><span class="ss"> grid-column: 1 / -1; padding: 10px; text-align: center; </span><span class="ch">}}</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ss">        .output </span><span class="ch">{{</span><span class="ss"> grid-column: 1 / -1; padding: 10px; text-align: center; font-weight: bold; </span><span class="ch">}}</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;/style&gt;</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">&lt;/head&gt;</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">&lt;body&gt;</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;div class="grid"&gt;</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;label&gt;Current Bikes&lt;/label&gt;</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;label&gt;Time&lt;/label&gt;</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;label&gt;Station&lt;/label&gt;</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;input type="number" id="num" value="10"&gt;</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;input type="datetime-local" id="date"&gt;</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;input type="text" id="name" list="listEl" placeholder="Search..." value="Ympyrätalo"&gt;</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;button id="button" class="button" onclick="calc()"&gt;Caculate&lt;/button&gt;</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="ss">        &lt;div id="out" class="output"&gt;&lt;/div&gt;</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;/div&gt;</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;datalist id="listEl"&gt;&lt;/datalist&gt;</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;script&gt;</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="ss">        const data = </span><span class="sc">{</span>data_json<span class="sc">}</span><span class="ss">;</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">        const list = [...new Set(Object.keys(data.coefficients).map(key =&gt; key.split('_')[0]))]</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="ss">        const listEl = document.getElementById('listEl');</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">        let options = '';</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="ss">        for (let n of list) </span><span class="ch">{{</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="ss">            options += '&lt;option value="' + n + '"&gt;' + n + '&lt;/option&gt;';</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="ss">        </span><span class="ch">}}</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="ss">        listEl.innerHTML = options;</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="ss">        document.getElementById('date').value = new Date(2026, 6, 6, 11, 0).toISOString().slice(0, 16);</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="ss">        const getWeekOfYear = (d) =&gt; </span><span class="ch">{{</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="ss">            const target = new Date(d.valueOf());</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="ss">            const dayNr = (d.getDay() + 6) % 7;</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="ss">            target.setDate(target.getDate() - dayNr + 3);</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="ss">            const firstThursday = target.valueOf();</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">            target.setMonth(0, 1);</span></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="ss">            if (target.getDay() !== 4) </span><span class="ch">{{</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="ss">                target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);</span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="ss">            </span><span class="ch">}}</span></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="ss">            return Math.ceil((firstThursday - target) / (7 * 24 * 60 * 60 * 1000)) + 1;</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="ss">        </span><span class="ch">}}</span><span class="ss">;</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="ss">        function calc() </span><span class="ch">{{</span></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="ss">            const intercept = data.intercept </span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="ss">            const date = (new Date(document.getElementById('date').value))</span></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">            const bikes = (parseFloat(document.getElementById('num').value) || 0)</span></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="ss">            const station = (document.getElementById('name').value.trim())</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">            const hour = `$</span><span class="ch">{{</span><span class="ss">station</span><span class="ch">}}</span><span class="ss">_h$</span><span class="ch">{{</span><span class="ss">(date.getHours() || 0)</span><span class="ch">}}</span><span class="ss">`</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="ss">            const day = `$</span><span class="ch">{{</span><span class="ss">station</span><span class="ch">}}</span><span class="ss">_d$</span><span class="ch">{{</span><span class="ss">((date.getDay() + 6) % 7 || 0)</span><span class="ch">}}</span><span class="ss">`</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="ss">            const week = `$</span><span class="ch">{{</span><span class="ss">station</span><span class="ch">}}</span><span class="ss">_w$</span><span class="ch">{{</span><span class="ss">(getWeekOfYear(date) || 0)</span><span class="ch">}}</span><span class="ss">`</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="ss">            const y = intercept + data.coefficients[hour] + data.coefficients[day] + data.coefficients[week]</span></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="ss">            const txt = "CEstimated change in station bike amount in next hr ="</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="ss">            </span></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">            document.getElementById('out').innerText = `$</span><span class="ch">{{</span><span class="ss">txt</span><span class="ch">}}</span><span class="ss"> $</span><span class="ch">{{</span><span class="ss">y.toFixed(1)</span><span class="ch">}}</span><span class="ss"> ($</span><span class="ch">{{</span><span class="ss">(bikes + y).toFixed(1)</span><span class="ch">}}</span><span class="ss"> bikes)`;</span></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="ss">        </span><span class="ch">}}</span></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="ss">    &lt;/script&gt;</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="ss">&lt;/body&gt;</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>HTML(htmlCode)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Every day thousands of people in Helsinki make their commute by bicycle, and many of them use city bikes found across the city. It has become a core way to get around in Helsinki. However, the users of city bikes sometimes face different problems when using the bikes: empty station when wanting to use a bike, full station when returning a bike or problems with using bikes.</p>
+<p>This data science project analyzes nine seasons of city bike trip records in Helsinki from 2017 to 2025. We use the publicly available dataset published by HSL. The project examines station departures and returns, trip volumes over time, and the patterns that emerge from the data. We also present our insights and recommendations for HSL based on our analysis.</p>
+<p>Cycling eases congestion and air pollution while giving residents of Helsinki an affordable and healthy way to navigate in the city. To realize these benefits, cycling needs to be a convenient choice for residents. Our aim is to analyze the data so that it can be used to make decisions on investing in the current bike infrastructure in Helsinki and improving logistics.</p>
+</section>
+<section id="trip-data" class="level2">
+<h2 class="anchored" data-anchor-id="trip-data">Trip data</h2>
+<figure style="text-align: center;" class="figure">
+<img src="duration_over_time.png" style="width: 100%; height: auto;" class="figure-img">
+<figcaption>
+Figure 1: Durations of all city bike trips for years 2017-2025.
+</figcaption>
+</figure>
+<p>Over nine seasons, a total of 22 million trips were made. When a season starts, the volume of trips starts to increase and peaks most years around June and July after which the volume decreases towards the end of the season. Significant portion of trips were under 20 minutes as seen in figure 1. Ride distance and velocity had a wider distribution, with the average distance and velocity being around 1km and 11 km/h respectively.</p>
+<figure style="text-align: center;" class="figure">
+<img src="trips_per_hour_popularity.png" style="width: 100%; height: auto;" class="figure-img">
+<figcaption>
+Figure 2: Hourly trip volume for years 2017-2025.
+</figcaption>
+</figure>
+<p>Hourly trip volume reveals a distinct bimodal commuter rhythm seen in figure 2. Demand surges during the morning peak between 07:00 and 09:00 as commuters head to offices and universities. Traffic remains steady through the midday, and reaches its highest volume during the evening peak between 15:00 and 18:00 (peaking around 16:30) as workers return home.</p>
+<figure style="text-align: center;" class="figure">
+<img src="Distance_disturbance_classification.png" style="width: 100%; height: auto;" class="figure-img">
+<figcaption>
+Figure 3: Rides with distance between 25 and 200 meters.
+</figcaption>
+</figure>
+<p>During data cleaning, we identified short round-trips where a user returned the bike to the same station within 3 minutes and covered under 100 meters. These indicate faulty bikes, slipping gears, or dock release errors. Our analysis revealed that 2.7% to 7.2% of all annual trips (59,000 to 203,000 trips each year) are hardware disturbances, providing a valuable metric for dock and fleet maintenance. Figure 3 shows the volume of trips where traveled distance was small.</p>
+<section id="multi-year-evolution-20172025" class="level3">
+<h3 class="anchored" data-anchor-id="multi-year-evolution-20172025">Multi-Year Evolution (2017–2025)</h3>
+<ul>
+<li>2017–2019: Early adoption grew rapidly from 1.59 million rides in 2017 to a record of 3.18 million rides in 2019.</li>
+<li>2020: During the COVID-19 pandemic, ridership dropped to 2.63 million due to remote work and distance learning.</li>
+<li>2021: The system expanded significantly into northern and eastern neighborhoods, recording 2.44 million trips.</li>
+<li>2022–2025: The network matured into a steady equilibrium, reliably handling between 2.11 million and 2.23 million trips each year.</li>
+</ul>
+</section>
+</section>
+<section id="stations" class="level2">
+<h2 class="anchored" data-anchor-id="stations">Stations</h2>
+<figure style="text-align: center;" class="figure">
+<img src="Capacity_heatmap.png" style="width: 100%; height: auto;" class="figure-img">
+<figcaption>
+Figure 4: Average change in capacity at the most popular bike stations.
+</figcaption>
+</figure>
+<p>We inspected how bike station capacity changes between stations. Fig 4. has a heatmap of average hourly capacity change in the 10 busiest stations. We see that even though some stations have a high volume of traffic, the capacity remains reasonably stable. Some stations lose bikes in the morning and receive bikes in the evening; some stations experience the opposite. Most significant capacity change also does not always happen during the busiest hours. Some stations lose or gain overall a significant number of bikes during the day. Pasilan Asema bike station had the largest ratio of departures over arrivals. This implies a lot of people arrive at Pasila train station via other means but leave with a city bike. Holidays also affect capacity. The largest instance of more bikes arriving over leaving happens at Esplanadi during the first of May where the Labor Day celebrations are held.</p>
+<figure style="text-align: center; " class="figure">
+<img src="busiest_stations.png" style="width: 100%; height: auto;" class="figure-img">
+<figcaption>
+Figure 5: Departures and returns at 15 most used stations.
+</figcaption>
+</figure>
+<p>By reverse-geocoding all 347 stations with OpenStreetMap Nominatim, we mapped every station to its 5-digit postal code (00100 Kluuvi, 00180 Kamppi, 00530 Kallio, etc.). Aggregating departures from 2017 to 2025 shows the top 5 busiest hubs across Helsinki: - Itämerentori (Ruoholahti) — Top station in the network with over 453,000 departures. - Töölönlahdenkatu &amp; Central Railway Station (Rautatientori) — Primary rail/metro transfer point with over 385,000 departures. - Ympyrätalo (Hakaniemi) — Dense northern transit gateway. - Kalasatama (M) &amp; Kamppi — Core metro and shopping interchanges.</p>
+</section>
+<section id="insights-from-data" class="level2">
+<h2 class="anchored" data-anchor-id="insights-from-data">Insights from data</h2>
+<p>Using our data on how bike station capacity changes, we were able to create a calculator that estimates bike availability. HSL itself does not currently provide any estimator for bike traffic in their travel planner. Using our data, it would be very easy for them to add estimators beside station capacity amounts.</p>
+<section id="ride-capacity-calculator" class="level3">
+<h3 class="anchored" data-anchor-id="ride-capacity-calculator">Ride capacity calculator</h3>
+<div id="e0e6c2e4" class="cell">
+<div class="cell-output cell-output-display" data-execution_count="4">
 
 
     <style>
@@ -275,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <input type="datetime-local" id="date">
         <input type="text" id="name" list="listEl" placeholder="Search..." value="Ympyrätalo">
 
-        <button id="button" class="button" onclick="calc()">Caculate</button>
+        <button id="button" class="button" onclick="calc()">Calculate</button>
 
         <div id="out" class="output"></div>
     </div>
@@ -315,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             const week = `${station}_w${(getWeekOfYear(date) || 0)}`
 
             const y = intercept + data.coefficients[hour] + data.coefficients[day] + data.coefficients[week]
-            const txt = "CEstimated change in station bike amount in next hr ="
+            const txt = "Estimated change in station bike amount in next hr ="
 
 
             document.getElementById('out').innerText = `${txt} ${y.toFixed(1)} (${(bikes + y).toFixed(1)} bikes)`;
@@ -325,8 +264,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
+<p>This tool is useful for end users and HSL alike. If a station has currently few bikes, it is easy to check if it is likely to empty soon. Users can avoid missing out on bikes, and bike relocation can be more preemptive. We do not have data on bike refills or recent trends, so the estimations can often be quite different from reality.</p>
+<figure style="text-align: center;" class="figure">
+<img src="busiest_stations.png" style="width: 100%; height: auto;" class="figure-img">
+<figcaption>
+Figure 6: Bike stations clustered by similar traffic.
+</figcaption>
+</figure>
+<p>To understand why stations with similar patterns are close together, we built an Unsupervised Spatial-Constrained Clustering model combining each station’s 6 nearest geographic neighbors with their 24-hour demand curves. This revealed 3 key neighborhood archetypes across Helsinki as seen in figure 6: - Commercial &amp; Transit Sinks (Clusters 0 &amp; 4): Located in Kamppi, Kluuvi, and Ruoholahti. High morning inflows, busy midday turnover, and massive evening outflows. - Residential Commuter Sources (Clusters 3 &amp; 5): Located in Kallio, Alppiharju, and Töölö. High morning departure spikes as residents head to work, followed by evening return accumulation. - Peripheral &amp; Recreational Outposts (Clusters 1 &amp; 2): Flatter diurnal curves with higher weekend and leisure riding.</p>
+</section>
+</section>
+<section id="what-our-findings-tell-to-hsl-and-users" class="level2">
+<h2 class="anchored" data-anchor-id="what-our-findings-tell-to-hsl-and-users">What our findings tell to HSL and users</h2>
+<p>For Commuters: - While the network is generally reliable, commuters traveling through high-demand hubs (Central Station, Pasila, Itämerentori) during peak rush hours face occasional dock shortages and should keep a backup station in mind. Operational Recommendations for HSL: - Cluster-Based Proactive Rebalancing: Shuttle bikes from Commercial Sinks (Clusters 0 &amp; 4) back to Residential Origins (Clusters 3 &amp; 5) between 13:00 and 15:00, before the evening rush begins. - Automated Disturbance Triage: When a station records 3 or more consecutive trips returned to the same station in under 3 minutes, automatically alert maintenance teams to inspect the dock for damaged latches or faulty bikes. - High-Volume Capacity Upgrades: High-saturation hubs (Itämerentori, Töölönlahdenkatu, and Pasila) should receive expanded dock allocations or overflow drop-zones to prevent full-station return failures.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Across 9 seasons and 21.3 million rides, one thing is clear: Helsinki’s city bikes are the heartbeat of the capital’s daily commute. With 85.8% of trips taking under 20 minutes, they aren’t for sightseeing. Instead, they’re fast connectors between homes, metros, and offices. Busiest hubs like Itämerentori and Töölönlahdenkatu face massive rush-hour imbalances every day. By filtering out broken trips and using spatial machine learning, we grouped 347 stations into functional neighborhoods, separating morning residential sources from busy downtown sinks. We then turned these insights into an interactive availability calculator to help riders beat dock congestion and commute with confidence.</p>
+</section>
+<section id="project-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="project-limitations">Project Limitations</h2>
+<p>While our models offer deep historical insight, the project has a few practical limitations.<br>
+- No real-time weather data - Sudden rainfall, wind, and seasonal temperature swings strongly influence cycling volumes, but this weather information is not currently included in our dataset or reflected in our predictions.<br>
+- Static station modeling – The models treat stations statically and do not track individual bike maintenance lifecycles. - Delayed Data Updates - The datasets are only updated after the end of the season, meaning we cannot use data during the season to evaluate traffic.<br>
+- Unknown station capacity - The measured datapoints are somewhat lacking; we also do not know the capacity of a station at any given time. The public dataset does not record HSL’s manual truck rebalancing logs.</p>
+</section>
+<section id="possible-future-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="possible-future-analysis">Possible Future Analysis</h2>
+<p>Looking ahead, there are several exciting avenues for future development: - Adding weather Data: add weather information from the Finnish Meteorological Institute (FMI) into our prediction model. In Finland, rain and bad weather are the main reasons people decide not to ride bikes so this would make our predictions much more accurate.<br>
+- Tracking Metro and Train Delays: Connect live delay and cancellation data from trains and the metro. When trains break down or get delayed at busy stations like Pasila or the Central Railway Station, people rush to grab city bikes instead. Knowing about delays in real time would help predict these sudden spikes in demand.<br>
+- Testing AI models: Try more advanced tools (like graph neural networks (GNNs)) that can look the whole city at once and understand how bikes flow from one neighborhood to another throughout the day.<br>
+- Planning Better Driving Routes for HSL: develop a tool that plans the best driving routes for city workers who move bikes. It could tell them the fastest way to pick up extra bikes from office areas in the evening and bring them back to residential neighborhoods before the next morning rush.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
